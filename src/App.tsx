@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react'
 import { Todos } from './types/types'
 import axios from 'axios'
+import {Header, List, Footer} from "./components/index"
 import './App.css'
 
 function App() {
   const [todos, setTodos] = useState<Todos[]>([])
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/todos")
+    axios.get("https://jsonplaceholder.typicode.com/todos?_limit=15")
     .then((res) => setTodos(res.data))
   }, [])
 
-  console.log(todos);
-
   return (
-      <section className='p-5 w-[450px] bg-dark-brown rounded-md shadow-2xl'>
-
+      <section className='p-5 w-[550px] bg-dark-brown rounded-md shadow-2xl'>
+        <Header />
+        <List todos={todos} />
+        <Footer todos={todos} />
       </section>
   )
 }

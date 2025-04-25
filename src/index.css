@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@theme {
+  --color-pink: #3E1671;
+  --color-light-pink: #9E78CF;
+  --color-hover-pink: #8350c5;
+  --color-dark-brown: #15101C;
+  --color-light-brown: #2d2636;
+  --shadow-input: 0 0 4px rgba(255, 255, 255, 0.523);
+}
