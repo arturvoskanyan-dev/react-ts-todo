@@ -1,9 +1,7 @@
 import { TodosItem } from "../../types/types"
 import ListItem from "../ListItem/ListItem"
 
-const List = ({todos} : TodosItem) => {
-    console.log(todos);
-    
+const List = ({todos} : TodosItem) => { 
     return (
         <section>
             <ul className='max-h-[450px] overflow-y-scroll list'>

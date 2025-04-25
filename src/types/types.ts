@@ -11,3 +11,7 @@ export type TodosItem = {
     title?: string,
     completed?: boolean
 }
+
+export type HeaderProps = {
+    handleSubmit: (title: string) => void
+}

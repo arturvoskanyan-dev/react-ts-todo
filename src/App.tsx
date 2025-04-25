@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Todos } from './types/types'
 import axios from 'axios'
-import {Header, List, Footer} from "./components/index"
+import { Header, List, Footer } from "./components/index"
 import './App.css'
 
 function App() {
@@ -9,15 +9,26 @@ function App() {
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/todos?_limit=15")
-    .then((res) => setTodos(res.data))
+      .then((res) => setTodos(res.data))
   }, [])
 
+  const handleSubmit = (title: string) => {
+    setTodos(prev => [
+      ...prev,
+      {
+        id: Date.now(),
+        title,
+        completed: false
+      }
+    ])
+  }
+
   return (
-      <section className='p-5 w-[550px] bg-dark-brown rounded-md shadow-2xl'>
-        <Header />
-        <List todos={todos} />
-        <Footer todos={todos} />
-      </section>
+    <section className='p-5 w-[550px] bg-dark-brown rounded-md shadow-2xl'>
+      <Header handleSubmit={handleSubmit} />
+      <List todos={todos} />
+      <Footer todos={todos} />
+    </section>
   )
 }
 
