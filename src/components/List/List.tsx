@@ -1,7 +1,7 @@
 import { TodosItem } from "../../types/types"
 import ListItem from "../ListItem/ListItem"
 
-const List = ({todos} : TodosItem) => { 
+const List = ({todos, remove, changeCompleted} : TodosItem) => { 
     return (
         <section>
             <ul className='max-h-[450px] overflow-y-scroll list'>
@@ -11,8 +11,10 @@ const List = ({todos} : TodosItem) => {
                             <ListItem
                                 id={todo.id}
                                 key={todo.id}
+                                remove={remove}
                                 title={todo.title}
                                 completed={todo.completed}
+                                changeCompleted={changeCompleted}
                             />
                         )
                     })

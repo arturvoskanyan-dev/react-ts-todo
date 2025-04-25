@@ -23,11 +23,31 @@ function App() {
     ])
   }
 
+  const changeCompleted = (id: number | undefined, completed: boolean) => {
+    setTodos(todos.map((todo) => {
+      if(todo.id === id) {
+        return {
+          ...todo,
+          completed : completed
+        }
+      }
+      return todo
+    }))
+  }
+
+  const remove = (id: number | undefined) => {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
+
+  const clearAll = () => {
+    setTodos([])
+  }
+
   return (
     <section className='p-5 w-[550px] bg-dark-brown rounded-md shadow-2xl'>
       <Header handleSubmit={handleSubmit} />
-      <List todos={todos} />
-      <Footer todos={todos} />
+      <List todos={todos} remove={remove} changeCompleted={changeCompleted} />
+      <Footer todos={todos} clearAll={clearAll} />
     </section>
   )
 }
