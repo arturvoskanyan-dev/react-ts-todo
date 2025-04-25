@@ -25,10 +25,22 @@ function App() {
 
   const changeCompleted = (id: number | undefined, completed: boolean) => {
     setTodos(todos.map((todo) => {
-      if(todo.id === id) {
+      if (todo.id === id) {
         return {
           ...todo,
-          completed : completed
+          completed: completed
+        }
+      }
+      return todo
+    }))
+  }
+
+  const editTitle = (id: number | undefined, newTitle: string | undefined) => {
+    setTodos(todos.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          title: newTitle
         }
       }
       return todo
@@ -46,7 +58,7 @@ function App() {
   return (
     <section className='p-5 w-[550px] bg-dark-brown rounded-md shadow-2xl'>
       <Header handleSubmit={handleSubmit} />
-      <List todos={todos} remove={remove} changeCompleted={changeCompleted} />
+      <List todos={todos} remove={remove} changeCompleted={changeCompleted} editTitle={editTitle} />
       <Footer todos={todos} clearAll={clearAll} />
     </section>
   )

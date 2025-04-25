@@ -14,7 +14,8 @@ export type TodosItem = {
     id?: number,
     title?: string,
     completed?: boolean,
-    remove?: (id: number | undefined) => void,
     changeCompleted?: (id: number | undefined, completed: boolean) => void,
+    editTitle?: (id: number | undefined, newTitle: string | undefined) => void,
+    remove?: (id: number | undefined) => void,
     clearAll?: () => void
 }
