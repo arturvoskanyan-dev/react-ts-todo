@@ -1,12 +1,12 @@
-import { TodosItem } from '../../types/types'
+import { FooterProps } from '../../types/types'
 
-const Footer = ({ todos, clearAll }: TodosItem) => {
+const Footer = ({ todos, clearAll }: FooterProps) => {
     const tasks: number | undefined = todos?.filter(d => d.completed).length;
 
     return (
         <footer className='flex justify-between items-center border-t-2 border-pink'>
             <span className='text-white'>You have {tasks}/{todos?.length} tasks</span>
-            {todos?.length && 
+            {todos?.length > 0 && 
             <button 
             onClick={clearAll}
             className='p-2.5 w-20 bg-light-pink text-white rounded-md cursor-pointer transition-all hover:bg-hover-pink'>

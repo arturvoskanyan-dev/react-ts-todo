@@ -1,7 +1,7 @@
-import { TodosItem } from "../../types/types"
+import { ListProps } from "../../types/types"
 import ListItem from "../ListItem/ListItem"
 
-const List = ({todos, remove, changeCompleted, editTitle} : TodosItem) => { 
+const List = ({todos, remove, changeCompleted, editTitle} : ListProps) => { 
     return (
         <section>
             <ul className='max-h-[450px] overflow-y-scroll list'>

@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/todos?_limit=15")
-      .then((res) => setTodos(res.data))
+      .then((res) => setTodos(res?.data))
   }, [])
 
   const handleSubmit = (title: string) => {
@@ -23,7 +23,7 @@ function App() {
     ])
   }
 
-  const changeCompleted = (id: number | undefined, completed: boolean) => {
+  const changeCompleted = (id: number, completed: boolean) => {
     setTodos(todos.map((todo) => {
       if (todo.id === id) {
         return {
@@ -35,7 +35,7 @@ function App() {
     }))
   }
 
-  const editTitle = (id: number | undefined, newTitle: string | undefined) => {
+  const editTitle = (id: number, newTitle: string ) => {
     setTodos(todos.map((todo) => {
       if (todo.id === id) {
         return {
@@ -47,7 +47,7 @@ function App() {
     }))
   }
 
-  const remove = (id: number | undefined) => {
+  const remove = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id))
   }
 

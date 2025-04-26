@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { TodosItem } from '../../types/types';
+import { TodosItem, ListProps } from '../../types/types';
 import { MdEdit, FaRegTrashCan, IoCheckbox } from "../index"
 
-const ListItem = ({ id, title, completed, remove, changeCompleted, editTitle }: TodosItem) => {
+const ListItem = ({ id, title, completed, remove, changeCompleted, editTitle }: TodosItem & ListProps) => {
     const [newTitle, setNewTitle] = useState(title);
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
