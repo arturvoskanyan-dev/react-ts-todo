@@ -1,9 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { changeText, add } from '../../store/slices/todoSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const Header = () => {
-    const {text} = useSelector((state: any) => state.todoState);
-    const dispatch = useDispatch();
+    const {text} = useAppSelector((state) => state.todoState);
+    const dispatch = useAppDispatch();
     
     const submit = () => {
         if(text.trim()) {

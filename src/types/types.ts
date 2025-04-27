@@ -5,21 +5,11 @@ export type Todos = {
     completed: boolean,
 }
 
-export type TodosItem = {
-    id: number,
-    title: string,
-    completed: boolean,
-}
-
-export type ListProps = {
-    todos?: Todos[],
-}
-
-export type FooterProps = {
+export type IProps = {
     todos: Todos[]
 }
 
 export type TodosStateType = {
     text: string,
-    todos: Array<TodosItem>
+    todos: Array<Todos>
 }

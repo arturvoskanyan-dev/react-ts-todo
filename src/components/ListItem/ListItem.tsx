@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { TodosItem, ListProps } from '../../types/types';
+import { IProps, Todos } from '../../types/types';
 import { MdEdit, FaRegTrashCan, IoCheckbox } from "../index"
-import { useDispatch } from 'react-redux';
 import { changeCompleted, editTitle, remove } from '../../store/slices/todoSlice';
+import { useAppDispatch } from '../../store/hooks';
 
-const ListItem = ({ id, title, completed }: TodosItem & ListProps) => {
+const ListItem = ({ id, title, completed }: Todos & IProps) => {
     const [newTitle, setNewTitle] = useState(title);
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     return (
         <li className='flex justify-between items-center gap-4 p-2.5 mb-4 bg-light-brown rounded-sm'>
@@ -36,7 +36,6 @@ const ListItem = ({ id, title, completed }: TodosItem & ListProps) => {
                         ? <IoCheckbox onClick={() => { dispatch(editTitle({id, newTitle})); setIsEdit(false)}} />
                         : <MdEdit onClick={() => setIsEdit(true)} />
                 }
-                {/* <FaRegTrashCan onClick={() => remove?.(id)} /> */}
                 <FaRegTrashCan onClick={() => dispatch(remove(id))} />
             </div>
         </li>
