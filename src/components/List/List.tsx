@@ -1,7 +1,7 @@
 import { ListProps } from "../../types/types"
 import ListItem from "../ListItem/ListItem"
 
-const List = ({todos, remove, changeCompleted, editTitle} : ListProps) => { 
+const List = ({todos} : ListProps) => { 
     return (
         <section>
             <ul className='max-h-[450px] overflow-y-scroll list'>
@@ -11,11 +11,8 @@ const List = ({todos, remove, changeCompleted, editTitle} : ListProps) => {
                             <ListItem
                                 id={todo.id}
                                 key={todo.id}
-                                remove={remove}
                                 title={todo.title}
-                                editTitle={editTitle}
                                 completed={todo.completed}
-                                changeCompleted={changeCompleted}
                             />
                         )
                     })

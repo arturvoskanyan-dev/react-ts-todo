@@ -11,18 +11,15 @@ export type TodosItem = {
     completed: boolean,
 }
 
-export type HeaderProps = {
-    handleSubmit: (title: string) => void
-}
-
 export type ListProps = {
     todos?: Todos[],
-    changeCompleted: (id: number, completed: boolean) => void,
-    editTitle: (id: number, newTitle: string) => void,
-    remove: (id: number) => void,
 }
 
 export type FooterProps = {
-    todos: Todos[],
-    clearAll: () => void
+    todos: Todos[]
+}
+
+export type TodosStateType = {
+    text: string,
+    todos: Array<TodosItem>
 }

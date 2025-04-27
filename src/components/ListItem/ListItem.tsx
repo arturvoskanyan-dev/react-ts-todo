@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import { TodosItem, ListProps } from '../../types/types';
 import { MdEdit, FaRegTrashCan, IoCheckbox } from "../index"
+import { useDispatch } from 'react-redux';
+import { changeCompleted, editTitle, remove } from '../../store/slices/todoSlice';
 
-const ListItem = ({ id, title, completed, remove, changeCompleted, editTitle }: TodosItem & ListProps) => {
+const ListItem = ({ id, title, completed }: TodosItem & ListProps) => {
     const [newTitle, setNewTitle] = useState(title);
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     return (
         <li className='flex justify-between items-center gap-4 p-2.5 mb-4 bg-light-brown rounded-sm'>
             <input
                 type="checkbox"
                 checked={completed}
-                onChange={() => changeCompleted?.(id, !completed)}
+                onChange={() => dispatch(changeCompleted(id))}
                 className="cursor-pointer"
             />
             {
@@ -30,10 +33,11 @@ const ListItem = ({ id, title, completed, remove, changeCompleted, editTitle }: 
             <div className='flex gap-2 text-xl text-white cursor-pointer'>
                 {
                     isEdit
-                        ? <IoCheckbox onClick={() => { editTitle?.(id, newTitle); setIsEdit(false) }} />
+                        ? <IoCheckbox onClick={() => { dispatch(editTitle({id, newTitle})); setIsEdit(false)}} />
                         : <MdEdit onClick={() => setIsEdit(true)} />
                 }
-                <FaRegTrashCan onClick={() => remove?.(id)} />
+                {/* <FaRegTrashCan onClick={() => remove?.(id)} /> */}
+                <FaRegTrashCan onClick={() => dispatch(remove(id))} />
             </div>
         </li>
     )
