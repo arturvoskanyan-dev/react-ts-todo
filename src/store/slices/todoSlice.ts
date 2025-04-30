@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TodosStateType } from "../../types/types";
+import { TodosStateType, Todos } from "../../types/types";
 import { getTodos, changeCompleted, postTodos, editList } from "./todoAPI";
 
 const initialState: TodosStateType = {
@@ -26,10 +26,10 @@ const todoSlice = createSlice({
             .addCase(getTodos.fulfilled, (state, action) => {
                 state.todos = action.payload;
             })
-            .addCase(postTodos.fulfilled, (state, action) => {
+            .addCase(postTodos.fulfilled, (state, action: PayloadAction<Todos>) => {
                 state.todos = [...state.todos, { id: Date.now(), title: action.payload.title, completed: false }]
             })
-            .addCase(changeCompleted.fulfilled, (state, action) => {
+            .addCase(changeCompleted.fulfilled, (state, action: PayloadAction<{id:number, completed:boolean}>) => {
                 state.todos = state.todos.map((todo) => {
                     if (todo.id === action.payload.id) {
                         return {
@@ -40,7 +40,7 @@ const todoSlice = createSlice({
                     return todo
                 })
             })
-            .addCase(editList.fulfilled, (state, action) => {
+            .addCase(editList.fulfilled, (state, action: PayloadAction<{id:number, title:string}>) => {   
                 state.todos = state.todos.map((todo) => {
                     if (todo.id === action.payload.id) {
                         return {

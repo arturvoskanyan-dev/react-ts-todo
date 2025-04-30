@@ -11,10 +11,12 @@ const ListItem = ({ id, title, completed }: Todos & IProps) => {
     const dispatch = useAppDispatch();
 
     const change = (id: number, completed: boolean) => {
+        console.log(id, completed);
+        
         dispatch(changeCompleted({id, completed}))
     }
 
-    const edit = (id:number, title:string) => {
+    const edit = (id:number, title:string) => { 
         dispatch(editList({id, title}))
         setIsEdit(false)
     }
@@ -32,7 +34,7 @@ const ListItem = ({ id, title, completed }: Todos & IProps) => {
                     ? <span
                         onDoubleClick={() => setIsEdit(true)}
                         className={`flex-1 ${completed ? "text-gray-500 line-through" : "text-white"} font-bold truncate`}>
-                        {title}
+                        {newTitle}
                     </span>
                     : <input
                         value={newTitle}
