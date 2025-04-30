@@ -1,5 +1,6 @@
-import { changeText, add } from '../../store/slices/todoSlice';
+import { changeText } from '../../store/slices/todoSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { postTodos } from '../../store/slices/todoAPI';
 
 const Header = () => {
     const {text} = useAppSelector((state) => state.todoState);
@@ -7,7 +8,7 @@ const Header = () => {
     
     const submit = () => {
         if(text.trim()) {
-            dispatch(add())
+            dispatch(postTodos(text))
         }
         dispatch(changeText(""))
     }

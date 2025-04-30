@@ -1,7 +1,7 @@
 import { Header, List, Footer } from "./components/index"
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { useEffect } from "react";
-import { getTodosAPI } from "./store/slices/todoAPI";
+import { getTodos } from "./store/slices/todoAPI";
 import './App.css'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getTodosAPI())
+    dispatch(getTodos())
   }, [])
 
   return (

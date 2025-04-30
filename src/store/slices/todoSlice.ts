@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TodosStateType } from "../../types/types";
-import { getTodosAPI } from "./todoAPI";
+import { getTodos, changeCompleted, postTodos, editList } from "./todoAPI";
 
 const initialState: TodosStateType = {
     todos: [],
@@ -14,31 +14,6 @@ const todoSlice = createSlice({
         changeText(state, action: PayloadAction<string>) {
             state.text = action.payload;
         },
-        add(state) {
-            state.todos = [...state.todos, { id: Date.now(), title: state.text, completed: false }]
-        },
-        changeCompleted(state, action: PayloadAction<number>) {
-            state.todos = state.todos.map((todo) => {
-                if (todo.id === action.payload) {
-                    return {
-                        ...todo,
-                        completed: !todo.completed
-                    }
-                }
-                return todo
-            })
-        },
-        editTitle(state, action: PayloadAction<{id: number, newTitle: string}>) {
-            state.todos = state.todos.map((todo) => {
-                if (todo.id === action.payload.id) {
-                    return {
-                        ...todo,
-                        title: action.payload.newTitle
-                    }
-                }
-                return todo
-            })
-        },
         remove(state, action: PayloadAction<number>) {
             state.todos = state.todos.filter((todo) => todo.id !== action.payload)
         },
@@ -48,11 +23,36 @@ const todoSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-          .addCase(getTodosAPI.fulfilled, (state, action) => {
-            state.todos = action.payload;
-          })
+            .addCase(getTodos.fulfilled, (state, action) => {
+                state.todos = action.payload;
+            })
+            .addCase(postTodos.fulfilled, (state, action) => {
+                state.todos = [...state.todos, { id: Date.now(), title: action.payload.title, completed: false }]
+            })
+            .addCase(changeCompleted.fulfilled, (state, action) => {
+                state.todos = state.todos.map((todo) => {
+                    if (todo.id === action.payload.id) {
+                        return {
+                            ...todo,
+                            completed: !todo.completed
+                        }
+                    }
+                    return todo
+                })
+            })
+            .addCase(editList.fulfilled, (state, action) => {
+                state.todos = state.todos.map((todo) => {
+                    if (todo.id === action.payload.id) {
+                        return {
+                            ...todo,
+                            title: action.payload.title
+                        }
+                    }
+                    return todo
+                })
+            })
     },
 })
 
-export const { changeText, add, changeCompleted, editTitle, remove, clearAll } = todoSlice.actions;
+export const { changeText, remove, clearAll } = todoSlice.actions;
 export default todoSlice.reducer;
