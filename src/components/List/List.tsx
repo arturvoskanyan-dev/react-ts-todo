@@ -2,8 +2,6 @@ import { IProps } from "../../types/types"
 import ListItem from "../ListItem/ListItem"
 
 const List = ({todos} : IProps) => { 
-    console.log(todos);
-    
     return (
         <section>
             <ul className='max-h-[450px] overflow-y-scroll list'>

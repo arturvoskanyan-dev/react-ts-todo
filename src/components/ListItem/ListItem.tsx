@@ -3,7 +3,7 @@ import { IProps, Todos } from '../../types/types';
 import { MdEdit, FaRegTrashCan, IoCheckbox } from "../index"
 import { useAppDispatch } from '../../store/hooks';
 import { changeCompleted, editList } from '../../store/slices/todoAPI';
-import { remove } from '../../store/slices/todoSlice';
+import {  changeTodoId, remove } from '../../store/slices/todoSlice';
 
 const ListItem = ({ id, title, completed }: Todos & IProps) => {
     const [newTitle, setNewTitle] = useState(title);
@@ -11,13 +11,13 @@ const ListItem = ({ id, title, completed }: Todos & IProps) => {
     const dispatch = useAppDispatch();
 
     const change = (id: number, completed: boolean) => {
-        console.log(id, completed);
-        
         dispatch(changeCompleted({id, completed}))
+        dispatch(changeTodoId(id))
     }
 
     const edit = (id:number, title:string) => { 
         dispatch(editList({id, title}))
+        dispatch(changeTodoId(id))
         setIsEdit(false)
     }
 
@@ -34,7 +34,7 @@ const ListItem = ({ id, title, completed }: Todos & IProps) => {
                     ? <span
                         onDoubleClick={() => setIsEdit(true)}
                         className={`flex-1 ${completed ? "text-gray-500 line-through" : "text-white"} font-bold truncate`}>
-                        {newTitle}
+                        {title}
                     </span>
                     : <input
                         value={newTitle}

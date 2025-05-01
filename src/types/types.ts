@@ -11,5 +11,6 @@ export type IProps = {
 
 export type TodosStateType = {
     text: string,
-    todos: Array<Todos>
+    todos: Array<Todos>,
+    todoId: null | number
 }
