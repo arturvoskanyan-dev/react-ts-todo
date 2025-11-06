@@ -21,6 +21,7 @@ const Header = () => {
                     type="text"
                     value={text}
                     onChange={(e) => dispatch(changeText(e.target.value))}
+                    placeholder='Enter your todo ...'
                     className='p-1.5 mr-4 w-full text-white border-2 border-pink rounded-sm'
                 />
                 <button
