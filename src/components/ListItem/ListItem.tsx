@@ -1,22 +1,22 @@
 import { useState } from 'react';
-import { IProps, Todos } from '../../types/types';
+import { Todos } from '../../types/types';
 import { MdEdit, FaRegTrashCan, IoCheckbox } from "../index"
 import { useAppDispatch } from '../../store/hooks';
 import { changeCompleted, editList } from '../../store/slices/todoAPI';
-import {  changeTodoId, remove } from '../../store/slices/todoSlice';
+import { changeTodoId, remove } from '../../store/slices/todoSlice';
 
-const ListItem = ({ id, title, completed }: Todos & IProps) => {
+const ListItem = ({ id, title, completed }: Todos) => {
     const [newTitle, setNewTitle] = useState(title);
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
     const change = (id: number, completed: boolean) => {
-        dispatch(changeCompleted({id, completed}))
+        dispatch(changeCompleted({ id, completed }))
         dispatch(changeTodoId(id))
     }
 
-    const edit = (id:number, title:string) => { 
-        dispatch(editList({id, title}))
+    const edit = (id: number, title: string) => {
+        dispatch(editList({ id, title }))
         dispatch(changeTodoId(id))
         setIsEdit(false)
     }
@@ -42,13 +42,15 @@ const ListItem = ({ id, title, completed }: Todos & IProps) => {
                         className='p-2 flex-1 bg-transparent text-white rounded-2xl truncate shadow-input'
                     />
             }
-            <div className='flex gap-2 text-xl text-white cursor-pointer'>
+            <div className='flex gap-2 text-xl text-white [&>button]:cursor-pointer'>
                 {
                     isEdit
-                        ? <IoCheckbox onClick={() =>  edit(id, newTitle)} />
-                        : <MdEdit onClick={() => setIsEdit(true)} />
+                        ? <button aria-label="change-edit-btn" onClick={() => edit(id, newTitle)}><IoCheckbox /></button>
+                        : <button aria-label="edit-btn" onClick={() => setIsEdit(true)}><MdEdit /></button>
                 }
-                <FaRegTrashCan onClick={() => dispatch(remove(id))} />
+                <button aria-label='remove-btn' onClick={() => dispatch(remove(id))}>
+                    <FaRegTrashCan />
+                </button>
             </div>
         </li>
     )

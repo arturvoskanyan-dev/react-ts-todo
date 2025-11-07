@@ -11,7 +11,7 @@ const List = ({todos} : IProps) => {
                             <ListItem
                                 id={todo.id}
                                 key={todo.id}
-                                todos={todos}
+                                // todos={todos}
                                 title={todo.title}
                                 completed={todo.completed}
                             />
